@@ -1,4 +1,4 @@
-FROM python:3.10-slim
+FROM python:3.11-slim
 
 WORKDIR /app
 
@@ -9,4 +9,5 @@ COPY . .
 
 EXPOSE 5000
 
-CMD ["python", "app.py"]
+# Use Waitress for a production-ready WSGI server instead of the Flask dev server
+CMD ["waitress-serve", "--port=5000", "app:app"]
